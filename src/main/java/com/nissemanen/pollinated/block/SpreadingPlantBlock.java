@@ -11,14 +11,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class SpreadingPlantBlock extends BushBlock {
-    public static final MapCodec<SpreadingPlantBlock> CODEC = simpleCodec(SpreadingPlantBlock::new);
-
     public static final IntegerProperty MATURITY = IntegerProperty.create("maturity", 0, 5);
     public static final IntegerProperty OFFSPRING_COUNT = IntegerProperty.create("offspring", 0, 3);
-
-    protected MapCodec<? extends BushBlock> codec() {
-        return CODEC;
-    }
 
     public SpreadingPlantBlock(Properties properties) {
         super(properties);
@@ -26,6 +20,11 @@ public class SpreadingPlantBlock extends BushBlock {
                 .setValue(MATURITY, 0)
                 .setValue(OFFSPRING_COUNT, 0)
         );
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return simpleCodec(SpreadingPlantBlock::new);
     }
 
     @Override
